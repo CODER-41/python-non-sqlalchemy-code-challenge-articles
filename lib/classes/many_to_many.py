@@ -159,11 +159,9 @@ class Magazine:
 
         """
         if not isinstance(value, str):
-            # FIX: Removed the period to match expected test message
             raise ValueError("Name must be a string")
         #validate  name length (2-16 characters)
         if not (2 <= len(value) <= 16):
-            # FIX: Removed the period to match expected test message
             raise ValueError("Name must be between 2 and 16 characters")
         self._name = value
 
