@@ -104,7 +104,13 @@ class Author:
         #pass
 
     def magazines(self):
-        pass
+        """
+        Retuns a unique list of magazines this author has contributed to.
+        Uses a set to collect unique magazines from the author's articles.
+        """
+        return list (set([article.magazine for article in self.articles()]))
+
+        #pass
 
     def add_article(self, magazine, title):
         pass
