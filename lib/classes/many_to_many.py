@@ -229,7 +229,7 @@ class Magazine:
             if len(author_articles) > 2:
                 result.append(author)
 
-        # FIX: The return statement was inside the loop, which caused it to exit after checking only the first author.
+    
         # It has been moved outside the loop.
         return result if result else None
 
