@@ -235,4 +235,21 @@ class Magazine:
             return result if result else None
         #pass
     
-    
+    @classmethod
+    def top_publisher(cls):
+        """
+        Class method that returns the magazines instance  with the most articles
+        Returns None if there are no articlesat all.
+        """
+        if not Article.all:
+            return None 
+        #count articles per magazine
+        magazine_counts = {}
+        for article in Article.all:
+            magazine = article.magazine
+            magazine_counts[magazine] = magazine_counts.get(magazine, 0) + 1
+        
+        # Return the magazine with the highest article count
+        return max(magazine_counts, key=magazine_counts.get)
+        
+        
