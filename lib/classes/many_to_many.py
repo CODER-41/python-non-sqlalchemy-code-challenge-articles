@@ -95,8 +95,13 @@ class Author:
         self._name = value  
 
     def articles(self):
-        
-        pass
+        """
+        Returns a list of Article instances written by this author.
+        Filters the Article.all list to find articles where author matches self.
+        """
+        return [article for article in Article.all if article.author == self]
+
+        #pass
 
     def magazines(self):
         pass
