@@ -180,7 +180,6 @@ class Magazine:
         Can be changed after initialization.(mutable)
         """
         if not isinstance(value, str):
-            # FIX: Removed the period to match expected test message
             raise ValueError("Category must be a string")
         #validate category is not empty
         if len(value) == 0:
