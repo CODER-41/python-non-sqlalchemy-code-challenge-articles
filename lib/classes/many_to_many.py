@@ -1,13 +1,14 @@
 class Article:
     # Class variable to track all articles instances
-    all= []
+    all = []
 
     def __init__(self, author, magazine, title):
+        # Setters will validate the inputs
         self.author = author
         self.magazine = magazine
         self.title = title
 
-        #Add this article for tracking  
+        #Add this article for tracking
         Article.all.append(self)
 
     @property
@@ -21,23 +22,25 @@ class Article:
         Title cannot be changed once set.(uses hasattr to check if _title is already set)
         Title muts be a string between 5 and 50 characters.
         """
-        
+
         #prevent changing title if already set
         if hasattr(self, '_title'):
             return
         #validate that title is a string
         if not isinstance(value, str):
-            raise ValueError("Title must be a string.")
+            # FIX: Removed the period to match expected test message
+            raise ValueError("Title must be a string")
         #validate length of title
         if not (5 <= len(value) <= 50):
-            raise ValueError("Title must be between 5 and 50 characters.")
+            # FIX: Removed the period to match expected test message
+            raise ValueError("Title must be between 5 and 50 characters")
         self._title = value
-    
+
     @property
     def author(self):
         """Getter for author property."""
         return self._author
-    
+
     @author.setter
     def author(self, value):
         """
@@ -46,14 +49,15 @@ class Article:
         Author must be an instance of Author class.
         """
         if not isinstance(value, Author):
-            raise ValueError("Author must be an instance of Author class.")
+            # FIX: Removed ' class.' to match expected test message
+            raise ValueError("Author must be an instance of Author")
         self._author = value
-    
+
     @property
     def magazine(self):
         """Getter for magazine property."""
         return self._magazine
-    
+
     @magazine.setter
     def magazine(self, value):
         """
@@ -62,7 +66,8 @@ class Article:
         Magazine must be an instance of Magazine class.
         """
         if not isinstance(value, Magazine):
-            raise ValueError("Magazine must be an instance of Magazine class.")
+            # FIX: Removed ' class.' to match expected test message
+            raise ValueError("Magazine must be an instance of Magazine")
         self._magazine = value
 
 class Author:
@@ -73,7 +78,6 @@ class Author:
     def name(self):
         """Getter for name property."""
         return self._name
-
 
 
     @name.setter
@@ -87,12 +91,14 @@ class Author:
         if hasattr(self, '_name'):
             return
         if not isinstance(value, str):
-            raise ValueError("Name must be a string.")
-        
+            # FIX: Removed the period to match expected test message
+            raise ValueError("Name must be a string")
+
         #validate name is not empty
         if len(value) == 0:
-            raise ValueError("Name must be longer than 0 characters.")
-        self._name = value  
+            # FIX: Removed the period to match expected test message
+            raise ValueError("Name must be longer than 0 characters")
+        self._name = value
 
     def articles(self):
         """
@@ -101,16 +107,12 @@ class Author:
         """
         return [article for article in Article.all if article.author == self]
 
-        #pass
-
     def magazines(self):
         """
         Retuns a unique list of magazines this author has contributed to.
         Uses a set to collect unique magazines from the author's articles.
         """
         return list (set([article.magazine for article in self.articles()]))
-
-        #pass
 
     def add_article(self, magazine, title):
         """
@@ -119,8 +121,6 @@ class Author:
         """
 
         return Article(self, magazine, title)
-
-        #pass
 
     def topic_areas(self):
         """
@@ -134,8 +134,6 @@ class Author:
         #collect unique categories from magazines of author's articles
         return list(set([article.magazine.category for article in articles]))
 
-
-        #pass
 
 class Magazine:
     #class variable to track all magazine instances
@@ -151,7 +149,7 @@ class Magazine:
     def name(self):
         """Getter for name property."""
         return self._name
-    
+
     @name.setter
     def name(self, value):
         """
@@ -161,17 +159,19 @@ class Magazine:
 
         """
         if not isinstance(value, str):
-            raise ValueError("Name must be a string.")
+            # FIX: Removed the period to match expected test message
+            raise ValueError("Name must be a string")
         #validate  name length (2-16 characters)
         if not (2 <= len(value) <= 16):
-            raise ValueError("Name must be between 2 and 16 characters.")
+            # FIX: Removed the period to match expected test message
+            raise ValueError("Name must be between 2 and 16 characters")
         self._name = value
 
     @property
     def category(self):
         """Getter for category property."""
         return self._category
-    
+
     @category.setter
     def category(self, value):
         """
@@ -180,10 +180,12 @@ class Magazine:
         Can be changed after initialization.(mutable)
         """
         if not isinstance(value, str):
-            raise ValueError("Category must be a string.")
+            # FIX: Removed the period to match expected test message
+            raise ValueError("Category must be a string")
         #validate category is not empty
         if len(value) == 0:
-            raise ValueError("Category must be longer than 0 characters.")
+            # FIX: Removed the period to match expected test message
+            raise ValueError("Category must be longer than 0 characters")
         self._category = value
 
 
@@ -194,20 +196,17 @@ class Magazine:
         """
         return [article for article in Article.all if article.magazine == self]
 
-        #pass
-
     def contributors(self):
         """
         Returns a unique list of authors who have contributed to this magazine.
         Uses a set to collect unique authors from the magazine's articles and to remove duplicates.
         """
         return list(set([article.author for article in self.articles()]))
-        #pass
 
     def article_titles(self):
         """
         Returns a list of title strings for all articles in in this magazine
-        Return None if the magazine has no articles. 
+        Return None if the magazine has no articles.
         """
 
         articles = self.articles()
@@ -216,40 +215,39 @@ class Magazine:
             return None
         #collect titles from articles
         return [article.title for article in articles]
-        #pass
 
     def contributing_authors(self):
-        """"
-        Rerturns a list of authors  who have written more than two articles for this magazine.
+        """
+        Rerturns a list of authors who have written more than two articles for this magazine.
         Return None if no author have written more than two articles.
         """
         authors = self.contributors()
         result = []
         #count articles per author and filter those with > 2 articles
         for author in authors:
-            author_articles = [article for article in self.articles() if article.author  == author]
-            if len (author_articles) > 2:
+            author_articles = [article for article in self.articles() if article.author == author]
+            if len(author_articles) > 2:
                 result.append(author)
-            
-            #return None if no authors found with > 2 articles
-            return result if result else None
-        #pass
-    
+
+        # FIX: The return statement was inside the loop, which caused it to exit after checking only the first author.
+        # It has been moved outside the loop.
+        return result if result else None
+
     @classmethod
     def top_publisher(cls):
         """
-        Class method that returns the magazines instance  with the most articles
+        Class method that returns the magazines instance with the most articles
         Returns None if there are no articlesat all.
         """
         if not Article.all:
-            return None 
+            return None
         #count articles per magazine
         magazine_counts = {}
         for article in Article.all:
             magazine = article.magazine
             magazine_counts[magazine] = magazine_counts.get(magazine, 0) + 1
-        
+
         # Return the magazine with the highest article count
         return max(magazine_counts, key=magazine_counts.get)
-        
+    
         
