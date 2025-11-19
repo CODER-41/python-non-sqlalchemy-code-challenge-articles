@@ -138,15 +138,71 @@ class Author:
         #pass
 
 class Magazine:
+    #class variable to track all magazine instances
+    all = []
+
     def __init__(self, name, category):
         self.name = name
         self.category = category
 
+        Magazine.all.append(self)
+
+    @property
+    def name(self):
+        """Getter for name property."""
+        return self._name
+    
+    @name.setter
+    def name(self, value):
+        """
+        Setter for name property with validation.
+        Name must be a string between 2 and 16 characters (inclusive).
+        Can be changed after initialization.(mutable)
+
+        """
+        if not isinstance(value, str):
+            raise ValueError("Name must be a string.")
+        #validate  name length (2-16 characters)
+        if not (2 <= len(value) <= 16):
+            raise ValueError("Name must be between 2 and 16 characters.")
+        self._name = value
+
+    @property
+    def category(self):
+        """Getter for category property."""
+        return self._category
+    
+    @category.setter
+    def category(self, value):
+        """
+        Setter for category property with validation.
+        Category must be a non-empty string.
+        Can be changed after initialization.(mutable)
+        """
+        if not isinstance(value, str):
+            raise ValueError("Category must be a string.")
+        #validate category is not empty
+        if len(value) == 0:
+            raise ValueError("Category must be longer than 0 characters.")
+        self._category = value
+
+
     def articles(self):
-        pass
+        """
+        Returns a list of all articles published in this magazine.
+        Filters the Article.all list to find articles where magazine matches self.
+        """
+        return [article for article in Article.all if article.magazine == self]
+
+        #pass
 
     def contributors(self):
-        pass
+        """
+        Returns a unique list of authors who have contributed to this magazine.
+        Uses a set to collect unique authors from the magazine's articles and to remove duplicates.
+        """
+        return list(set([article.author for article in self.articles()]))
+        #pass
 
     def article_titles(self):
         pass
