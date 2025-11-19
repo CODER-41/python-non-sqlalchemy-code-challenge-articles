@@ -96,7 +96,7 @@ class Author:
 
         #validate name is not empty
         if len(value) == 0:
-            # FIX: Removed the period to match expected test message
+            
             raise ValueError("Name must be longer than 0 characters")
         self._name = value
 
