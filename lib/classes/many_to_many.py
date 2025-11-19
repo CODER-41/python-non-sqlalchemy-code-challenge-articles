@@ -205,7 +205,34 @@ class Magazine:
         #pass
 
     def article_titles(self):
-        pass
+        """
+        Returns a list of title strings for all articles in in this magazine
+        Return None if the magazine has no articles. 
+        """
+
+        articles = self.articles()
+        #return None if magazine has no articles
+        if not articles:
+            return None
+        #collect titles from articles
+        return [article.title for article in articles]
+        #pass
 
     def contributing_authors(self):
-        pass
+        """"
+        Rerturns a list of authors  who have written more than two articles for this magazine.
+        Return None if no author have written more than two articles.
+        """
+        authors = self.contributors()
+        result = []
+        #count articles per author and filter those with > 2 articles
+        for author in authors:
+            author_articles = [article for article in self.articles() if article.author  == author]
+            if len (author_articles) > 2:
+                result.append(author)
+            
+            #return None if no authors found with > 2 articles
+            return result if result else None
+        #pass
+    
+    
