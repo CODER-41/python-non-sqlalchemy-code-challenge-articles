@@ -32,7 +32,6 @@ class Article:
             raise ValueError("Title must be a string")
         #validate length of title
         if not (5 <= len(value) <= 50):
-            # FIX: Removed the period to match expected test message
             raise ValueError("Title must be between 5 and 50 characters")
         self._title = value
 
@@ -49,7 +48,7 @@ class Article:
         Author must be an instance of Author class.
         """
         if not isinstance(value, Author):
-            # FIX: Removed ' class.' to match expected test message
+        
             raise ValueError("Author must be an instance of Author")
         self._author = value
 
