@@ -184,7 +184,7 @@ class Magazine:
             raise ValueError("Category must be a string")
         #validate category is not empty
         if len(value) == 0:
-            # FIX: Removed the period to match expected test message
+        
             raise ValueError("Category must be longer than 0 characters")
         self._category = value
 
