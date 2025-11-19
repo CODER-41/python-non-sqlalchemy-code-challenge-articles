@@ -91,7 +91,6 @@ class Author:
         if hasattr(self, '_name'):
             return
         if not isinstance(value, str):
-            # FIX: Removed the period to match expected test message
             raise ValueError("Name must be a string")
 
         #validate name is not empty
