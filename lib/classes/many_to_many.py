@@ -113,10 +113,29 @@ class Author:
         #pass
 
     def add_article(self, magazine, title):
-        pass
+        """
+        Creates and returns a new Article instance.
+        Associates the article with this author and the provided magazine
+        """
+
+        return Article(self, magazine, title)
+
+        #pass
 
     def topic_areas(self):
-        pass
+        """
+        Returns a unique list of category strings for magazines this author has contributed to.
+        Returns None if the author has not contributed to any magazines.
+        """
+        articles = self.articles()
+        #return None if author has no articles
+        if not articles:
+            return None
+        #collect unique categories from magazines of author's articles
+        return list(set([article.magazine.category for article in articles]))
+
+
+        #pass
 
 class Magazine:
     def __init__(self, name, category):
