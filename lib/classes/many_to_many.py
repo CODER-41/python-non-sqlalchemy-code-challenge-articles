@@ -66,7 +66,6 @@ class Article:
         Magazine must be an instance of Magazine class.
         """
         if not isinstance(value, Magazine):
-            # FIX: Removed ' class.' to match expected test message
             raise ValueError("Magazine must be an instance of Magazine")
         self._magazine = value
 
