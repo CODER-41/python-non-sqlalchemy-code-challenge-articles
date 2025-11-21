@@ -224,7 +224,7 @@ class Magazine:
                 result.append(author)
 
     
-        # It has been moved outside the loop.
+    
         return result if result else None
 
     @classmethod
