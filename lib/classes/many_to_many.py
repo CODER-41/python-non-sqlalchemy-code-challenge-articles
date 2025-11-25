@@ -27,7 +27,17 @@ class Article:
         if hasattr(self, '._title'):
             raise AttributeError("Cannot change title after article is instatiated")
         self._title = value
-                
+
+    @property
+    def author(self):
+        return self._author
+    
+    @author.setter
+    def author(self, value):
+        if not isinstance(value, Author):
+            raise TypeError("Author must be an instance of Author class")
+        self._author = value
+
         
 class Author:
     def __init__(self, name):
