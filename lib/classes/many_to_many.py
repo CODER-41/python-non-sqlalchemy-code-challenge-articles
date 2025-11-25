@@ -87,4 +87,8 @@ class Magazine:
         #pass
 
     def contributing_authors(self):
-        pass
+        from collections import Counter
+        articles = self.articles()
+        if not articles:
+            return None
+        #pass
