@@ -91,4 +91,22 @@ class Magazine:
         articles = self.articles()
         if not articles:
             return None
+        
+        author_counts = Counter([article.author for article in articles])
+        prolific_authors = [author for author, count in author_counts.items() if count > 2]
+
+        return prolific_authors if prolific_authors else None
+    
+    @classmethod
+    def top_publisher(cls):
+        if not Article._all:
+            return None
+        from collections import Counter
+        magazine_counts = Counter([article.magazine for article in Article ._all])
+
+        if not magazine_counts:
+            return None
+        
+        return magazine_counts.most_common(1)[0][0]
+
         #pass
