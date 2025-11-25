@@ -1,8 +1,33 @@
 class Article:
+    all = []
+
     def __init__(self, author, magazine, title):
+        if not isinstance(author, Author):
+            raise TypeError("Author must be an instance of Author class")
+        
+        if not isinstance(magazine, Magazine):
+            raise TypeError("Magazine must be an instance of Magazine class")
+        
+        if not isinstance(title, str):
+            raise TypeError("Title must be a string")
+        if not (5 <= len(title) <= 50):
+            raise ValueError("Ttitle must be between 5 and 50 characters")
+        
         self.author = author
         self.magazine = magazine
         self.title = title
+        Article._all.append(self)
+
+    @property
+    def title(self):
+        return self._title
+
+    @title.setter
+    def title(self, value):
+        if hasattr(self, '._title'):
+            raise AttributeError("Cannot change title after article is instatiated")
+        self._title = value
+                
         
 class Author:
     def __init__(self, name):
@@ -14,7 +39,8 @@ class Author:
 
     @property
     def name(self):
-        return self.__qualname__
+        return self._name
+    
     
     @name.setter
     def name(self, value):
