@@ -16,7 +16,7 @@ class Article:
         self.author = author
         self.magazine = magazine
         self.title = title
-        Article._all.append(self)
+        Article.all.append(self)
 
     @property
     def title(self):
@@ -55,7 +55,7 @@ class Author:
             raise TypeError("Name must be a string")
         if len(name) == 0:
             raise ValueError("Name must be longer than 0 characters")
-        self.name = name
+        self._name = name
 
     @property
     def name(self):
@@ -69,7 +69,7 @@ class Author:
         self._name = value
 
     def articles(self):
-        return[article for article in Article._all if article.auuthor == self]
+        return[article for article in Article.all if article.author == self]
         #pass
 
     def magazines(self):
@@ -118,7 +118,7 @@ class Magazine:
 
     
     def articles(self):
-        return[article for article in Article._all if article.magazine == self]
+        return[article for article in Article.all if article.magazine == self]
         #pass
 
     def contributors(self):
@@ -126,7 +126,7 @@ class Magazine:
         #pass
 
     def article_titles(self):
-        articles = self.aricles()
+        articles = self.articles()
         if not articles:
             return None
         return [article.title for article in articles]
@@ -145,10 +145,10 @@ class Magazine:
     
     @classmethod
     def top_publisher(cls):
-        if not Article._all:
+        if not Article.all:
             return None
         from collections import Counter
-        magazine_counts = Counter([article.magazine for article in Article ._all])
+        magazine_counts = Counter([article.magazine for article in Article.all])
 
         if not magazine_counts:
             return None
