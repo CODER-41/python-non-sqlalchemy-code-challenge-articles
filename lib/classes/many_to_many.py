@@ -11,7 +11,7 @@ class Article:
         if not isinstance(title, str):
             raise TypeError("Title must be a string")
         if not (5 <= len(title) <= 50):
-            raise ValueError("Ttitle must be between 5 and 50 characters")
+            raise ValueError("Title must be between 5 and 50 characters")
         
         self.author = author
         self.magazine = magazine
@@ -24,7 +24,7 @@ class Article:
 
     @title.setter
     def title(self, value):
-        if hasattr(self, '._title'):
+        if hasattr(self, '.title'):
             raise AttributeError("Cannot change title after article is instatiated")
         self._title = value
 
